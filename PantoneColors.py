@@ -30,13 +30,40 @@ def draw_text(text, font, text_col, x, y):
     img = font.render(text, True, text_col)
     screen.blit(img, (x, y))
 
+# Load Button Images
+play_img = pygame.image.load('Buttons/Play.png').convert_alpha()
+about_img = pygame.image.load('Buttons/About.png').convert_alpha()
+exit_img = pygame.image.load('Buttons/Exit.png').convert_alpha()
+
+# Button Class
+class Button():
+    def __init__(self, x , y, image):
+        self.image = image
+        self.rect = self.image.get_rect()
+        self.rect.topleft = (x, y)
+
+    def draw(self):
+        # Draw button on screen
+        screen.blit(self.image, (self.rect.x, self.rect.y))
+
+
+# Create Button Instances
+play_button = Button(100, 200, play_img)
+about_button = Button(100, 400, about_img)
+exit_button = Button(100, 600, exit_img)
+
 
 # Game Loop
 run = True
 while run:
 
     screen.fill((0, 0, 0))
-    
+
+    play_button.draw()
+    about_button.draw()
+    exit_button.draw()
+
+
     # Check if menu button has been pressed
     if game_menu == True:
         pass
