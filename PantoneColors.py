@@ -53,8 +53,9 @@ about_data = [
 
 about_text = [font.render(line, True, (255, 255, 255)) for line in about_data]
 
-# Game Loop
 
+
+# Game Loop
 random_color = None
 run = True
 while run:
@@ -87,7 +88,14 @@ while run:
             with open('colors.csv', 'r') as f:
                 reader = csv.reader(f)
                 random_color = random.choice(list(reader))
-            print(random_color)
+
+            name, code, r, g, b = random_color
+            rgb = (int(r), int(g), int(b))
+
+
+            print(name, code, rgb)
+            
+
             random_color = None
 
 
