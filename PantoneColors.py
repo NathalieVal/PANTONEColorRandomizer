@@ -27,11 +27,15 @@ def draw_text(text, font, text_col, x, y):
 
 # Load Button Images
 play_img = pygame.image.load('Gui/Buttons/Play.png').convert_alpha()
+playhover_img = pygame.image.load('Gui/Buttons/Play_HOVER.png').convert_alpha()
 randomcolor_img = pygame.image.load('Gui/Buttons/Random_Color.png').convert_alpha()
+randomcolorhover_img = pygame.image.load('Gui/Buttons/Random_Color_HOVER.png').convert_alpha()
 
 about_img = pygame.image.load('Gui/Buttons/About.png').convert_alpha()
+abouthover_img = pygame.image.load('Gui/Buttons/About_HOVER.png').convert_alpha()
 
 exit_img = pygame.image.load('Gui/Buttons/Exit.png').convert_alpha()
+exithover_img = pygame.image.load('Gui/Buttons/Exit_HOVER.png').convert_alpha()
 
 # Load Other GUI Images
 card_img = pygame.image.load('Gui/Card/Card.png').convert_alpha()
@@ -47,11 +51,12 @@ color_rect.center = (
 )
 
 # Create Button Instances
-play_button = button.Button(100, 200, play_img, 1)
-about_button = button.Button(100, 400, about_img, 1)
-randomcolor_button = button.Button(100, 200, randomcolor_img, 1)
+play_button = button.Button(100, 200, play_img, playhover_img, 1)
+randomcolor_button = button.Button(100, 200, randomcolor_img, randomcolorhover_img, 1)
 
-exit_button = button.Button(100, 600, exit_img, 1)
+about_button = button.Button(100, 400, about_img, abouthover_img, 1)
+
+exit_button = button.Button(100, 600, exit_img, exithover_img, 1)
 
 # About data
 about_data = [
