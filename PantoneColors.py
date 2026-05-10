@@ -47,6 +47,7 @@ class Button():
 
     def draw(self):
 
+        action = False
         # Get mouse position
         position = pygame.mouse.get_pos()
 
@@ -54,7 +55,7 @@ class Button():
         if self.rect.collidepoint(position):
             if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
                 self.clicked = True
-                print("Clicked!")
+                action = True
 
         if pygame.mouse.get_pressed()[0] == 0:
             self.clicked = False
@@ -62,6 +63,8 @@ class Button():
 
         # Draw button on screen
         screen.blit(self.image, (self.rect.x, self.rect.y))
+        
+        return action
 
 
 # Create Button Instances
@@ -76,9 +79,15 @@ while run:
 
     screen.fill((0, 0, 0))
 
-    play_button.draw()
-    about_button.draw()
-    exit_button.draw()
+    if play_button.draw() == True:
+        print("Play")
+        
+    if about_button.draw() == True:
+        print("About")
+
+    if exit_button.draw() == True:
+        print("Exit")
+        run = False
 
 
     # Check if menu button has been pressed
