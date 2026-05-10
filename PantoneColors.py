@@ -64,17 +64,17 @@ about_data = [
     "Audio: Pixabay"
 ]
 
-about_text = [font.render(line, True, (255, 255, 255)) for line in about_data]
+about_text = [font.render(line, True, 'white') for line in about_data]
 
 
 # Game Loop
-random_color = (255, 255, 255)
+random_color = (0, 0 ,0)
 color_text = []
 
 run = True
 while run:
 
-    screen.fill((0, 0, 0))
+    screen.fill('white')
 
     #Check menu state
     if game_state == "main":
@@ -114,8 +114,8 @@ while run:
             print(name, random_color)
 
             color_text = [
-                font.render(name, True, (0, 0, 0)),
-                font.render(f"{random_color}", True, (0, 0, 0)),
+                font.render(name, True, 'black'),
+                font.render(f"{random_color}", True, 'black'),
             ]
 
         screen.blit(card_img, card_rect)
