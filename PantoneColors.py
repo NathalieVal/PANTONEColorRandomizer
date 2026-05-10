@@ -1,12 +1,3 @@
-"""DAILY GAME PLAN:
-    MAY 2nd: 
-    Initialize pygame window
-    Potentially figure out custom window sizing if it doesn't take too long just between fullscreen & windowed (https://www.youtube.com/watch?v=edJZOQwrMKw)
-    BASIC windows & menus. Get buttons working.
-
-    MAY 3RD:
-    Figur out color randomizer system ( I have an idea in my head w/ a CSV file)"""
-
 import pygame
 import sys
 import button
@@ -21,6 +12,7 @@ screen  = pygame.display.set_mode((1920, 1080)) # Initiates window
 
 # Game Variables
 game_menu = False
+menu_state = "main"
 
 # Font(s)
 font = pygame.font.SysFont("arialblack", 40)
@@ -42,6 +34,18 @@ play_button = button.Button(100, 200, play_img, 1)
 about_button = button.Button(100, 400, about_img, 1)
 exit_button = button.Button(100, 600, exit_img, 1)
 
+# About data
+about_data = [
+    "ABOUT", 
+    "", 
+    "Developer: Nathalie Perez", 
+    "", 
+    "Art: Nathalie Perez",
+    "", 
+    "Audio: Pixabay"
+]
+
+about_text = [font.render(line, True, (255, 255, 255)) for line in about_data]
 
 # Game Loop
 run = True
@@ -49,20 +53,30 @@ while run:
 
     screen.fill((0, 0, 0))
 
-    if play_button.draw(screen) == True:
-        print("Play")
-        
-    if about_button.draw(screen) == True:
-        print("About")
-
-    if exit_button.draw(screen) == True:
-        print("Exit")
-        run = False
-
-
     # Check if menu button has been pressed
     if game_menu == True:
-        pass
+
+        #Check menu state
+        if menu_state == "main":
+            
+            # Draw menu buttons
+            if play_button.draw(screen) == True:
+                game_menu = False
+                print("Play")
+                
+            if about_button.draw(screen) == True:
+                print("About")
+                menu_state = "options"
+
+            if exit_button.draw(screen) == True:
+                print("Exit")
+                run = False
+
+        if menu_state == "options":
+            for i, surface in enumerate(about_text):
+                screen.blit(surface, (100, 100 + i * 50))
+
+
         # Display menu
     else: 
         draw_text("Press ESC to return to menu", font, text_col, 160, 250)
@@ -76,8 +90,13 @@ while run:
 
         if event.type == KEYDOWN:
             if event.key == K_ESCAPE:
-                game_menu = True
-                print("Game Menu")
+
+                if menu_state == "options":
+                    menu_state = "main"
+
+                else:
+                    game_menu = True
+                    print("Game Menu")
 
     pygame.display.update()
     clock.tick(60)
