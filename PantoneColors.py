@@ -83,6 +83,14 @@ class SceneManager:
 
 
 class Scene:
+
+    """THIS IS A TEMPLATE FOR SCENES
+    Some scenes use all functions and some don't.
+    Empty functions can be deleted but I like how consistent they look with every function.
+    In future decisions they can come in handy so I prefer to leave them.
+
+    """
+
     def __init__(self, game):
         self.game = game
 
@@ -186,7 +194,6 @@ class Intro(Scene):
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
                     self.game.scene_manager.set_scene(self.game.menu_scene)
-                    print("SKIP!")
                     pygame.event.set_blocked(pygame.MOUSEBUTTONDOWN)
 
     def update(self):
@@ -330,10 +337,8 @@ class Randomizer(Scene):
         name, code, r, g, b = random_row
         self.random_color = int(r), int(g), int(b)
 
-        print(name, code, self.random_color)
-
         self.text_color = [
-            self.game.font.render(name, True, 'black'),
+            self.game.font.render(f"PANTONE {name}", True, 'black'),
             self.game.font.render(f"{self.random_color}", True, 'black'),
         ]
 
