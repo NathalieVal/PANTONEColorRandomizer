@@ -43,7 +43,8 @@ class SceneManager:
             self.current_scene.update()
             return
         
-        self.progress += 0.02 # Speed
+        # Transition speed
+        self.progress += 0.02
 
         if self.state == "transition":
             if self.progress >= 1:
@@ -87,22 +88,26 @@ class SceneManager:
 
 class Scene:
 
-    """THIS IS A TEMPLATE FOR SCENES
-    Some scenes use all functions and some don't.
-    Empty functions can be deleted but I like how consistent they look with every function.
-    In future decisions they can come in handy so I prefer to leave them.
+    # THIS IS A TEMPLATE FOR SCENES
+    # Some scenes use all functions and some don't.
+    # Empty functions can be deleted but I like how consistent they look with every function.
+    # In future decisions they can come in handy so I prefer to leave them.
 
-    """
 
+    # Initializes any element needed within class
     def __init__(self, game):
         self.game = game
 
+    # Handles user events (primarily used for mouse clicks in this case)
     def handle_events(self, events):
         pass
-
+    
+    # Runs every frame to check game state.
+    # Most important within SceneManager related to scene managing and transitions.
     def update(self):
         pass
 
+    # Draws everything on the screen for that scene/ object.
     def draw(self, screen, offset_x=0):
         pass
 
@@ -133,6 +138,9 @@ class Main:
         self.exit_img = pygame.image.load('Gui/Buttons/Exit.png').convert_alpha()
         self.exithover_img = pygame.image.load('Gui/Buttons/Exit_HOVER.png').convert_alpha()
 
+        self.card_img = pygame.image.load('Gui/Card/Card.png').convert_alpha()
+
+
         #SFX 
         pygame.mixer.music.load('SFX/BackgroundMusic.mp3')
         pygame.mixer.music.set_volume(0.4)
@@ -140,10 +148,8 @@ class Main:
 
         self.click_sound = pygame.mixer.Sound('SFX/ButtonPress.mp3')
         self.card_sound = pygame.mixer.Sound('SFX/Card.mp3')
-        
 
-        self.card_img = pygame.image.load('Gui/Card/Card.png').convert_alpha()
-
+        # Clock
         self.clock = pygame.time.Clock()
         self.running = True
 
@@ -206,6 +212,7 @@ class Intro(Scene):
 
         self.finished = False
 
+    # Intro scene skip
     def handle_events(self, events):
         for event in events:
             if (event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and not self.finished):
@@ -220,6 +227,7 @@ class Intro(Scene):
             self.finished = True
             self.game.scene_manager.set_scene(self.game.menu_scene)
 
+    # Fade in, fade out, & logo
     def draw(self, screen, offset_x=0):
         screen.fill('white')
 
