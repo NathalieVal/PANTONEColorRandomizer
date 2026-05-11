@@ -16,7 +16,7 @@ screen  = pygame.display.set_mode((1920, 1080)) # Initiates window
 game_state = "main"
 
 # Font(s)
-font = pygame.font.SysFont("arialblack", 40)
+font = pygame.font.Font('Gui/Fonts/GrapeSoda.ttf', 40)
 
 # Font color(s)
 text_col = (255, 255, 255)
@@ -30,6 +30,8 @@ play_img = pygame.image.load('Gui/Buttons/Play.png').convert_alpha()
 playhover_img = pygame.image.load('Gui/Buttons/Play_HOVER.png').convert_alpha()
 randomcolor_img = pygame.image.load('Gui/Buttons/Random_Color.png').convert_alpha()
 randomcolorhover_img = pygame.image.load('Gui/Buttons/Random_Color_HOVER.png').convert_alpha()
+return_img = pygame.image.load('Gui/Buttons/Return.png').convert_alpha()
+returnhover_img = pygame.image.load('Gui/Buttons/Return_HOVER.png').convert_alpha()
 
 about_img = pygame.image.load('Gui/Buttons/About.png').convert_alpha()
 abouthover_img = pygame.image.load('Gui/Buttons/About_HOVER.png').convert_alpha()
@@ -51,12 +53,13 @@ color_rect.center = (
 )
 
 # Create Button Instances
-play_button = button.Button(100, 200, play_img, playhover_img, 1)
-randomcolor_button = button.Button(100, 200, randomcolor_img, randomcolorhover_img, 1)
+play_button = button.Button(250, 200, play_img, playhover_img, 1)
+randomcolor_button = button.Button(250, 300, randomcolor_img, randomcolorhover_img, 1)
+return_button = button.Button(250, 500, return_img, returnhover_img, 1)
 
-about_button = button.Button(100, 400, about_img, abouthover_img, 1)
+about_button = button.Button(250, 400, about_img, abouthover_img, 1)
 
-exit_button = button.Button(100, 600, exit_img, exithover_img, 1)
+exit_button = button.Button(250, 600, exit_img, exithover_img, 1)
 
 # About data
 about_data = [
@@ -122,6 +125,9 @@ while run:
                 font.render(name, True, 'black'),
                 font.render(f"{random_color}", True, 'black'),
             ]
+
+        if return_button.draw(screen):
+            game_state = "main"
 
         screen.blit(card_img, card_rect)
 
