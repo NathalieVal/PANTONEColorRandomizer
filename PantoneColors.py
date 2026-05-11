@@ -108,6 +108,8 @@ class Game:
         pygame.display.set_caption("Color Randomizer")
 
         # Loading Asset Images
+        # self.intro_img = pygame.image.load('Gui/Intro.png').convert_alpha()
+
         self.play_img = pygame.image.load('Gui/Buttons/Play.png').convert_alpha()
         self.playhover_img = pygame.image.load('Gui/Buttons/Play_HOVER.png').convert_alpha()
 
@@ -135,11 +137,12 @@ class Game:
         self.scene_manager = SceneManager()
 
         # Scenes
+        self.intro_scene = Intro(self)
         self.menu_scene = MainMenu(self)
         self.randomizer_scene = Randomizer(self)
         self.about_scene = About(self)
 
-        self.scene_manager.set_scene(self.menu_scene)
+        self.scene_manager.set_scene(self.intro_scene)
 
     def run(self):
         while self.running:
@@ -169,18 +172,56 @@ class Game:
         self.scene_manager.draw(self.screen)
             
 
-class Intro(Scene)
+class Intro(Scene):
     def __init__(self, game):
         self.game = game
+
+        # self.logo = game.intro_img
+        # self.logo_rect = self.logo.get_rect(center=(960, 540))
+
+        self.timer = 0
+
+        self.fade_in_time = 120
+        self.hold_time = 60
+        self.fade_out_time = 120
+
+        self.total_time = (self.fade_in_time + self.hold_time + self.fade_out_time)
 
     def handle_events(self, events):
         pass
 
     def update(self):
-        pass
+        self.timer += 1
+
+        if self.timer >= self.total_time:
+            self.game.scene_manager.set_scene(self.game.menu_scene)
 
     def draw(self, screen, offset_x=0):
-        pass
+        screen.fill('white')
+
+        alpha = 255
+
+        if self.timer < self.fade_in_time:
+            alpha = int((self.timer / self.fade_in_time) * 255)
+
+        elif self.timer < (self.fade_in_time + self.hold_time):
+            alpha = 255
+
+        else: 
+            self.fade_out_timer = (self.timer - self.fade_in_time - self.fade_out_time)
+
+            alpha = int(255 - (self.fade_out_timer / self.fade_out_time) * 255)
+
+
+        self.logo_placeholder = pygame.Surface ((200, 200))
+        self.logo_placeholder.set_colorkey((0, 0, 0))
+        self.logo_placeholder.set_alpha(alpha)
+        pygame.draw.circle(self.logo_placeholder, (0, 0, 255), (100, 100), 100)
+        screen.blit(self.logo_placeholder, (960, 540))
+
+        # self.logo.set_alpha(alpha)
+
+        # screen.blit(self.logo, self.logo_rect)
 
 
 class MainMenu(Scene):
