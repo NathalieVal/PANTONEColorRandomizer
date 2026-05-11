@@ -124,6 +124,7 @@ class Main:
 
         self.about_img = pygame.image.load('Gui/Buttons/About.png').convert_alpha()
         self.abouthover_img = pygame.image.load('Gui/Buttons/About_HOVER.png').convert_alpha()
+        self.credits_img = pygame.image.load('Gui/Credits.png').convert_alpha()
 
         self.exit_img = pygame.image.load('Gui/Buttons/Exit.png').convert_alpha()
         self.exithover_img = pygame.image.load('Gui/Buttons/Exit_HOVER.png').convert_alpha()
@@ -302,7 +303,7 @@ class ColorCard:
             
             rect = surface.get_rect(topleft=position)
             self.text_rects.append(rect)
-
+                
             screen.blit(surface, position)
 
 class Randomizer(Scene):
@@ -380,37 +381,21 @@ class Randomizer(Scene):
 class About(Scene):
     def __init__(self, game):
         self.game = game
-
+        self.credits_img = game.credits_img
         self.return_button = button.Button(300, 640, game.return_img, game.returnhover_img, 1)
 
-        about_data = [
-            "ABOUT", 
-            "", 
-            "Developer: Nathalie Perez", 
-            "", 
-            "Art: Nathalie Perez",
-            "", 
-            "Audio: Pixabay"
-        ]
-
-        self.about_text = [game.font.render(line, True, 'black') 
-                           for line in about_data]
-        
-    
     def handle_events(self, event):
         pass
     
     def update(self):
         pass
 
-        
     def draw(self, screen, offset_x):
         screen.fill('white')
+        
+        screen.blit(self.credits_img, (125, 200))
 
         self.return_button.offset_x = offset_x
-
-        for i, surface in enumerate(self.about_text):
-            screen.blit(surface, (100, 100 + i * 50))
 
         if self.return_button.draw(screen):
             self.game.scene_manager.set_scene(self.game.menu_scene)
