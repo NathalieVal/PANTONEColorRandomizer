@@ -1,11 +1,11 @@
 import pygame
 import sys
-import button
 import csv
 import random
+import button
+
 
 pygame.init()
-
 
 class SceneManager:
     def __init__(self):
@@ -88,6 +88,19 @@ class SceneManager:
             screen.blit(fade, (0, 0))
 
 
+class Scene:
+    def __init__(self, game):
+        self.game = game
+
+    def handle_events(self, events):
+        pass
+
+    def update(self):
+        pass
+
+    def draw(self, screen, offset_x=0):
+        pass
+
 
 class Game:
     def __init__(self):
@@ -156,7 +169,7 @@ class Game:
         self.scene_manager.draw(self.screen)
             
 
-class Scene:
+class Intro(Scene)
     def __init__(self, game):
         self.game = game
 
@@ -174,9 +187,9 @@ class MainMenu(Scene):
     def __init__(self, game):
         self.game = game
 
-        self.play_button = button.Button(250, 200, game.play_img, game.playhover_img, 1)
-        self.about_button = button.Button(250, 400, game.about_img, game.abouthover_img, 1)
-        self.exit_button = button.Button(250, 600, game.exit_img, game.exithover_img, 1)   
+        self.play_button = button.Button(300, 340, game.play_img, game.playhover_img, 1)
+        self.about_button = button.Button(300, 540, game.about_img, game.abouthover_img, 1)
+        self.exit_button = button.Button(300, 740, game.exit_img, game.exithover_img, 1)   
 
     def handle_events(self, event):
         pass
@@ -208,8 +221,8 @@ class Randomizer(Scene):
         self.random_color = (0, 0, 0)
         self.color_text = []
 
-        self.randomcolor_button = button.Button(250, 300, game.randomcolor_img, game.randomcolorhover_img, 1)
-        self.return_button = button.Button(250, 500, game.return_img, game.returnhover_img, 1)
+        self.randomcolor_button = button.Button(300, 440, game.randomcolor_img, game.randomcolorhover_img, 1)
+        self.return_button = button.Button(300, 640, game.return_img, game.returnhover_img, 1)
 
         self.card_img = game.card_img
         self.card_rect = self.card_img.get_rect(center=(960, 540))
@@ -217,6 +230,13 @@ class Randomizer(Scene):
         self.color_rect = pygame.Rect(0, 0, 455, 455)
         self.color_rect.center = (self.card_rect.centerx,
                                   self.card_rect.centery - 68)
+        
+    def handle_events(self, events):
+        for event in events:
+            pass
+
+    def update(self):
+        pass
 
     
     def draw(self, screen, offset_x):
@@ -254,16 +274,12 @@ class Randomizer(Scene):
             self.game.font.render(f"{self.random_color}", True, 'black'),
         ]
 
-    def handle_events(self, events):
-        for event in events:
-            pass
-
 
 class About(Scene):
     def __init__(self, game):
         self.game = game
 
-        self.return_button = button.Button(250, 500, game.return_img, game.returnhover_img, 1)
+        self.return_button = button.Button(300, 640, game.return_img, game.returnhover_img, 1)
 
         about_data = [
             "ABOUT", 
@@ -277,6 +293,14 @@ class About(Scene):
 
         self.about_text = [game.font.render(line, True, 'black') 
                            for line in about_data]
+        
+    
+    def handle_events(self, event):
+        pass
+    
+    def update(self):
+        pass
+
         
     def draw(self, screen, offset_x):
         screen.fill('white')
