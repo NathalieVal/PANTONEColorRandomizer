@@ -115,7 +115,7 @@ class Scene:
 class Main:
     def __init__(self):
         self.screen  = pygame.display.set_mode((1250, 1080)) # Initiates window
-        pygame.display.set_caption("Color Randomizer")
+        pygame.display.set_caption("PANTONE Color Randomizer")
 
         # Loading Asset Images
         self.logo_img = pygame.image.load('Gui/Intro.png').convert_alpha()
