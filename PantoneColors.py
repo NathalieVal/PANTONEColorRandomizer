@@ -185,8 +185,9 @@ class Intro(Scene):
         for event in events:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
-                    print("SKIP!")
                     self.game.scene_manager.set_scene(self.game.menu_scene)
+                    print("SKIP!")
+                    pygame.event.set_blocked(pygame.MOUSEBUTTONDOWN)
 
     def update(self):
         self.timer += 1

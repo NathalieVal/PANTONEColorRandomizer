@@ -1,7 +1,5 @@
 import pygame
 
-
-# Button Class
 class Button():
     def __init__(self, x , y, image, image_hover, scale):
         self.base_image = image
