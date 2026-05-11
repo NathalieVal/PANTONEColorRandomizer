@@ -11,14 +11,8 @@ class SceneManager:
     def __init__(self):
         self.current_scene = None
         self.next_scene = None
-
         self.state = "idle"
-
-        self.offset_x = 0
-        self.speed = 50
-
         self.progress = 0
-        self.direction = -1
 
     def set_scene(self, scene):
         if self.current_scene is None:
@@ -102,7 +96,7 @@ class Scene:
         pass
 
 
-class Game:
+class Main:
     def __init__(self):
         self.screen  = pygame.display.set_mode((1250, 1080)) # Initiates window
         pygame.display.set_caption("Color Randomizer")
@@ -142,7 +136,7 @@ class Game:
         self.randomizer_scene = Randomizer(self)
         self.about_scene = About(self)
 
-        self.scene_manager.set_scene(self.randomizer_scene)
+        self.scene_manager.set_scene(self.intro_scene)
 
     def run(self):
         while self.running:
@@ -263,8 +257,6 @@ class ColorCard:
 
         self.x, self.y = target_positon[0], -700
         self.target_x, self.target_y = target_positon
-
-        self.speed = 20
 
         self.rect = self.image.get_rect(center=(self.x, self.y))
 
@@ -394,4 +386,4 @@ class About(Scene):
 
 
 if __name__ == "__main__":
-    Game().run()
+    Main().run()
