@@ -9,6 +9,7 @@ import button
 pygame.init()
 pygame.mixer.init()
 
+
 class SceneManager:
     def __init__(self):
         self.current_scene = None
@@ -329,11 +330,23 @@ class ColorCard:
             screen.blit(surface, position)
 
 
-
 class Randomizer(Scene):
     def __init__(self, game):
         self.game = game
+        
+        self.website_text = [
+        "Click color name on card",
+        "to go to PANTONE website"]
 
+        self.website_surface = [self.game.font.render(line, True, ('black'))
+                                     for line in self.website_text]
+
+        self.website_posititon = []
+
+        for i, surf in enumerate(self.website_surface):
+            rect = surf.get_rect(center=(300, 250 + i * 30))
+            self.website_posititon.append(rect)
+    
         self.randomcolor_button = button.Button(300, 440, game.randomcolor_img, game.randomcolorhover_img, 1, game.click_sound)
         self.return_button = button.Button(300, 640, game.return_img, game.returnhover_img, 1, game.click_sound)
 
@@ -359,6 +372,9 @@ class Randomizer(Scene):
     def draw(self, screen, offset_x):
         screen.fill('white')
 
+        for surf, position in zip(self.website_surface, self.website_posititon):
+            screen.blit(surf, position)
+
         self.randomcolor_button.offset_x = offset_x
         self.return_button.offset_x = offset_x
         
@@ -381,7 +397,7 @@ class Randomizer(Scene):
         self.random_color = int(r), int(g), int(b)
 
         self.text_data = [f"PANTONE {name}",
-                          f"{self.random_color}"]
+                          f"RGB: {self.random_color}"]
 
         self.text_color = [
             self.game.font.render(self.text_data[0], True, 'black'), 

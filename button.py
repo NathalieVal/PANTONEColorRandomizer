@@ -50,7 +50,7 @@ class Button():
                 action = True
 
                 if self.click_sound:
-                    self.click_sound.set_volume(0.2)
+                    self.click_sound.set_volume(0.3)
                     self.click_sound.play()
 
         else: 
