@@ -1,7 +1,7 @@
 # PANTONEColorRandomizer
 
 ## Demo
-Demo Video: <URL>
+Demo Video: https://youtu.be/MxtcamBXBG0
 
 ## GitHub Repository
 GitHub Repo: https://github.com/NathalieVal/PANTONEColorRandomizer
